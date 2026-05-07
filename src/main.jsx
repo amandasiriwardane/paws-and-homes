@@ -8,8 +8,8 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider
       config={ {
-            signInRedirectURL: "http://localhost:5173",
-            signOutRedirectURL: "http://localhost:5173",
+            signInRedirectURL: "import.meta.env.VITE_RIDIRECT_URL",
+            signOutRedirectURL: "import.meta.env.VITE_RIDIRECT_URL",
             clientID: "YP1fP4DlfZSs7fkrMI6hHjpzlyAa",
             baseUrl: "https://api.eu.asgardeo.io/t/orgama",
             scope: [ "openid","profile" ]
