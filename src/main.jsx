@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { AuthProvider } from "@asgardeo/auth-react";
+import { UserProvider } from './context/UserContext.jsx';
 
 const isLocal = window.location.hostname==="localhost";
 const redirectURL = isLocal
@@ -18,10 +19,16 @@ createRoot(document.getElementById('root')).render(
             signOutRedirectURL: redirectURL,
             clientID: "YP1fP4DlfZSs7fkrMI6hHjpzlyAa",
             baseUrl: "https://api.eu.asgardeo.io/t/orgama",
-            scope: [ "openid","profile" ]
+            scope: [ "openid","profile","email","address", "phone" , "internal_login" ],
+            resourceServerURLs:[
+              "https://api.eu.asgardeo.io/t/orgama/scim2/Me"
+            ]
         } }
     >
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
+      
     </AuthProvider>
     
   </StrictMode>,
