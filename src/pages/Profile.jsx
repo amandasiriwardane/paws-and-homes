@@ -9,12 +9,13 @@ function Profile() {
             <h2>My Profile</h2>
             {userInfo? (
                 <>
-                <p> Name: {userInfo.displayName}</p>
-                <p>Email : {userInfo.email}</p>
-                <p>Username : {userInfo.username}</p>
-                <p>Birth date: {userInfo.birthdate}</p>
-                <p>Phone: {userInfo.phoneNumber}</p>
-                <p>Address: {userInfo.address.country}</p>
+                <p> Name: {userInfo?.name?.givenName}</p>
+                <p> Family Name: {userInfo?.name?.familyName}</p>
+                <p>Email : {userInfo?.emails?.[0]}</p>
+                <p>Username : {userInfo?.userName}</p>
+                <p>Country: {userInfo?.["urn:scim:wso2:schema"]?.country}</p>
+                <p>Birth Date: {userInfo?.["urn:scim:wso2:schema"]?.dateOfBirth}</p>
+                <p>Phone: {userInfo.phoneNumbers?.[0]?.value}</p>
                 </>
             ): (
                 <p>Loading .....</p>

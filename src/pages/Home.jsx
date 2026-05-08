@@ -12,8 +12,8 @@ function Home() {
     {
       state.isAuthenticated? (
         <div>
-          <h1>Welcome {userInfo?.givenName || userInfo?.username} !</h1>
-          <p>Email: {userInfo?.email} </p>
+          <h1>Welcome {userInfo?.name?.givenName || userInfo?.username} !</h1>
+          <p>Email: {userInfo?.emails?.[0]} </p>
           <Link to="/profile"> View Profile</Link>
           <Link to="/settings"> Settings</Link>
           <button onClick={()=> signOut()}>Logout</button>

@@ -4,14 +4,19 @@ import { useAuthContext } from "@asgardeo/auth-react";
 const UserContext = createContext()
 
 export function UserProvider({children}){
-    const {state, getBasicUserInfo } = useAuthContext()
+    const {state, getBasicUserInfo , httpRequest } = useAuthContext()
     const [ userInfo, setUserInfo ] =useState(null)
 
     const fetchUser =() =>{
         if (state.isAuthenticated){
-        getBasicUserInfo().then((info) => {
-            setUserInfo(info)
-        })
+            httpRequest({
+                url:"https://api.eu.asgardeo.io/t/orgama/scim2/Me",
+                method: "GET",
+                headers: {"Content-Type":"application/json"}
+            }).then((response)=>{
+                setUserInfo(response.data)
+            })
+        
         }
     }
     useEffect(()=>{

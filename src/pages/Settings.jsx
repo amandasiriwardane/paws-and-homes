@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "@asgardeo/auth-react";
 import { useUser } from "../context/UserContext";
 
@@ -11,6 +11,15 @@ function Settings(){
     })
 
     const [message, setMessage] =useState("")
+    useEffect(()=>{
+        if (userInfo){
+            setFormData({
+                givenName: userInfo?.name?.givenName || "",
+                phoneNumber : userInfo?.phoneNumbers?.[0]?.value ||"",
+            })
+        }
+    }, [userInfo])
+
     const handleChange = (e)=> {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
@@ -30,7 +39,7 @@ function Settings(){
                         "op": "replace",
                         "value": {
                             name: {givenName: formData.givenName},
-                            phoneNumber:[
+                            phoneNumbers:[
                                 {value: formData.phoneNumber, type: "mobile"}
                             ]
                         }
@@ -38,11 +47,14 @@ function Settings(){
                     ]
                 }
             })
-            refreshUser()
+            setTimeout(()=>{
+                refreshUser()
+            },1000)
+            console.log("Success:", response.data)
             setMessage("Profile updated successfully!")
         } catch(error){
             setMessage("Update Failed!")
-            console.log(error)
+            console.error("SCIM Error:", error?.response?.data || error)
         }
     }
 
