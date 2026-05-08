@@ -7,17 +7,19 @@ export function UserProvider({children}){
     const {state, getBasicUserInfo } = useAuthContext()
     const [ userInfo, setUserInfo ] =useState(null)
 
-    useEffect(()=>{
+    const fetchUser =() =>{
         if (state.isAuthenticated){
         getBasicUserInfo().then((info) => {
-            console.log(info)
             setUserInfo(info)
         })
         }
+    }
+    useEffect(()=>{
+        fetchUser()
     }, [state.isAuthenticated])
 
     return (
-        <UserContext.Provider value ={{userInfo}}>
+        <UserContext.Provider value ={{userInfo, refreshUser: fetchUser}}>
             {children}
         </UserContext.Provider>
     )

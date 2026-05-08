@@ -3,7 +3,7 @@ import { useAuthContext } from "@asgardeo/auth-react";
 import { useUser } from "../context/UserContext";
 
 function Settings(){
-    const {userInfo}= useUser()
+    const {userInfo, refreshUser}= useUser()
     const {httpRequest} =useAuthContext()
     const [formData, setFormData] =useState({
         givenName: userInfo?.givenName || "",
@@ -38,6 +38,7 @@ function Settings(){
                     ]
                 }
             })
+            refreshUser()
             setMessage("Profile updated successfully!")
         } catch(error){
             setMessage("Update Failed!")
