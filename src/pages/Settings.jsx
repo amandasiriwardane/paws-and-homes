@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAuthContext } from "@asgardeo/auth-react";
 import { useUser } from "../context/UserContext";
+import "../styles/settings.css"
 
 function Settings(){
-    const {userInfo, refreshUser}= useUser()
+    const {userInfo,userRole, refreshUser}= useUser()
     const {httpRequest} =useAuthContext()
     const [formData, setFormData] =useState({
         givenName: userInfo?.givenName || "",
@@ -59,9 +60,9 @@ function Settings(){
     }
 
     return (
-        <div>
-            <h2>Settings</h2>
-            <div>
+        <div className="settings-container">
+            <h2 className="settings-title">Settings</h2>
+            <div className="form-group">
                 <label>First Name:</label>
                 <input 
                 name="givenName"
@@ -69,7 +70,7 @@ function Settings(){
                 onChange={handleChange}
                 />
             </div>
-            <div>
+            <div className="form-group">
                 <label>Phone Number:</label>
                 <input 
                 name="phoneNumber"
@@ -77,8 +78,8 @@ function Settings(){
                 onChange={handleChange}
                 />
             </div>
-            <button onClick={handleSave}>Save Changes</button>
-            {message && <p>{message}</p>}
+            <button className="save-btn" onClick={handleSave}>Save Changes</button>
+            {message && (<p className={message.includes("successfully")? "success-msg":"error-msg"}>{message}</p>)}
 
         </div>
     )

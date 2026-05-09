@@ -2,29 +2,29 @@ import { useState , useEffect} from 'react'
 import { useAuthContext } from '@asgardeo/auth-react'
 import { useUser } from '../context/UserContext'
 import { Link } from 'react-router-dom'
+import "../styles/home.css"
 
 function Home() {
   const {state, signIn, signOut } = useAuthContext()
-  const {userInfo} = useUser()
+  const {userInfo, userRole} = useUser()
 
   return (
-    <>
-    {
-      state.isAuthenticated? (
+    <div className='home-container'>  
+      {state.isAuthenticated? (
         <div>
-          <h1>Welcome {userInfo?.name?.givenName || userInfo?.username} !</h1>
-          <p>Email: {userInfo?.emails?.[0]} </p>
-          <Link to="/profile"> View Profile</Link>
-          <Link to="/settings"> Settings</Link>
-          <button onClick={()=> signOut()}>Logout</button>
+          <h1 className='welcome-title'>Welcome {userInfo?.name?.givenName || userInfo?.username} !</h1>
+          <span className='welcome-role'>Role: {userRole}</span>
+
         </div>
       ) :(
         <div>
-          <button onClick={ ()=> signIn()}>Login</button>
+          <h1 className='home-title'>Paws and Homes</h1>
+          <p className='home-subtitle'> Find your Perfect pet companion!</p>
+          <button className='login-btn' onClick={ ()=> signIn()}>Login</button>
         </div>
       )
     }
-    </>
+    </div>
   )
 }
 

@@ -6,6 +6,7 @@ const UserContext = createContext()
 export function UserProvider({children}){
     const {state, getBasicUserInfo , httpRequest } = useAuthContext()
     const [ userInfo, setUserInfo ] =useState(null)
+    const [userRole, setUserRole]=useState(null)
 
     const fetchUser =() =>{
         if (state.isAuthenticated){
@@ -14,7 +15,13 @@ export function UserProvider({children}){
                 method: "GET",
                 headers: {"Content-Type":"application/json"}
             }).then((response)=>{
+                console.log("SCIM data",response.data)
+                console.log("Roles data",response.data?.roles)
                 setUserInfo(response.data)
+                const appRole = response.data?.roles?.find(
+                    role => role.audienceType==="application"
+                )
+                setUserRole(appRole?.display)
             })
         
         }
@@ -24,7 +31,7 @@ export function UserProvider({children}){
     }, [state.isAuthenticated])
 
     return (
-        <UserContext.Provider value ={{userInfo, refreshUser: fetchUser}}>
+        <UserContext.Provider value ={{userInfo, userRole, refreshUser: fetchUser}}>
             {children}
         </UserContext.Provider>
     )
