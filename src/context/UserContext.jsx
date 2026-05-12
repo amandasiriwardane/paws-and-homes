@@ -15,8 +15,8 @@ export function UserProvider({children}){
                 method: "GET",
                 headers: {"Content-Type":"application/json"}
             }).then((response)=>{
-                console.log("SCIM data",response.data)
-                console.log("Roles data",response.data?.roles)
+                {/*console.log("SCIM data",response.data)
+                console.log("Roles data",response.data?.roles)*/}
                 setUserInfo(response.data)
                 const appRole = response.data?.roles?.find(
                     role => role.audienceType==="application"

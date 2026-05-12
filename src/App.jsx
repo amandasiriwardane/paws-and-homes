@@ -10,6 +10,7 @@ import AddPet from "./pages/staff/AddPet";
 import ManageListings from "./pages/staff/ManageListings";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import Navbar from "./components/Navbar";
+import EditPet from "./pages/staff/editPet";
 
 function App(){
   const {state} =useAuthContext()
@@ -24,7 +25,7 @@ function App(){
 
         {/* Adopter routes*/}
         <Route path="/browse-pets" element={
-          <ProtectedRoute allowedRoles={["adopter"]}>
+          <ProtectedRoute allowedRoles={["adopter","shelter-staff"]}>
             <BrowsePets/>
           </ProtectedRoute> 
         }></Route> 
@@ -37,6 +38,11 @@ function App(){
         <Route path="/add-pet" element={
           <ProtectedRoute allowedRoles={["shelter-staff"]}>
             <AddPet/>
+          </ProtectedRoute> 
+        }></Route> 
+        <Route path="/edit-pet/:id" element={
+          <ProtectedRoute allowedRoles={["shelter-staff"]}>
+            <EditPet/>
           </ProtectedRoute> 
         }></Route> 
         <Route path="/manage-listings" element={

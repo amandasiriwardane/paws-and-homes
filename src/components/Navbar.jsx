@@ -24,6 +24,7 @@ function Navbar() {
           {/*shelter staff nav*/}
           {userRole==="shelter-staff" &&(
             <>
+            <Link to ="/browse-pets" className="navbar-link">Browser Pets</Link>
             <Link to ="/add-pet" className="navbar-link">Add New Pet</Link>
             <Link to ="/manage-listings" className="navbar-link">Manage my Listings</Link>
             </>

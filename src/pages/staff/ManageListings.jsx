@@ -32,19 +32,29 @@ function ManageListings() {
     }
   }
   return (
-    <div>
-        <h2>My listings</h2>
-        {pets.length===0?(
-            <p>No pets listed yet!</p> 
-        ): (
-            pets.map(pet =>(
-                <div key={pet.id}>
-                    <p>{pet.name}-{pet.species}</p>
-                    <button onClick={()=>handleDelete(pet.id)}>Delete</button>
-                </div>
-            ))
-        )}
-        {message && <p> {message}</p>}
+    <div className='page-container'>
+        <h2 className='page-title'>My listings</h2>
+        <div className='pet-grid'>
+            {pets.length===0?(
+                <p>No pets listed yet!</p> 
+            ): (
+                pets.map(pet =>(
+                    <div key={pet.id} className='pet-card'>
+                        <h3>{pet.name}</h3>
+                        <p>Species:{pet.species}</p>
+                        <p>Breed:{pet.breed}</p>
+                        <p>Age:{pet.age}</p>
+                        <span className={`pet-status status-${pet.status.toLowerCase()}`}> 
+                            {pet.status}
+                        </span>
+                        <div className='pet-actions'>
+                        <button onClick={()=>handleDelete(pet.id)} className='delete-btn'>Delete</button>
+                        </div>
+                    </div>
+                ))
+            )}
+            {message && <p> {message}</p>}
+        </div>
     </div>
   )
 }

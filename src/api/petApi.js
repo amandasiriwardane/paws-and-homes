@@ -26,3 +26,15 @@ export const deletePet = async (id, accessToken) =>{
     })
     return response.json()
 }
+
+export const updatePet = async (id,petData, accessToken) =>{
+    const response = await fetch(`${API_BASE_URL}/pets/${id}`,{
+        method : 'PATCH',
+        headers:{
+            'Content-Type':'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        },
+        body:JSON.stringify(petData)
+    })
+    return response.json()
+}
