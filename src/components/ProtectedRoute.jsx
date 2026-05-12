@@ -4,6 +4,7 @@ import AccessDenied from '../pages/AccessDenied'
 
 function ProtectedRoute({children, allowedRoles}) {
   const {userRole}=useUser()
+
   if (!allowedRoles.includes(userRole)){
     return <AccessDenied/>
   }

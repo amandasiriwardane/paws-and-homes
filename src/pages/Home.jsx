@@ -5,8 +5,15 @@ import { Link } from 'react-router-dom'
 import "../styles/home.css"
 
 function Home() {
-  const {state, signIn, signOut } = useAuthContext()
+  const {state, signIn, signOut, getAccessToken } = useAuthContext()
   const {userInfo, userRole} = useUser()
+
+  useEffect(()=>{
+    if(state.isAuthenticated){
+        getAccessToken().then(token => console.log(token))
+
+    }
+  }, [state.isAuthenticated])
 
   return (
     <div className='home-container'>  
