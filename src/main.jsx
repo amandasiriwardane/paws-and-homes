@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')).render(
             signOutRedirectURL: redirectURL,
             clientID: "YP1fP4DlfZSs7fkrMI6hHjpzlyAa",
             baseUrl: "https://api.eu.asgardeo.io/t/orgama",
-            scope: [ "openid","profile","email","address", "phone" ,"roles", "internal_login" ],
+            scope: [ "openid","profile","email","address", "phone" ,"roles", "internal_login","internal_user_mgt_list" ],
             resourceServerURLs:[
               "https://api.eu.asgardeo.io/t/orgama/scim2/Me"
             ]
