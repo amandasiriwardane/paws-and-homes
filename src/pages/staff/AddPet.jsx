@@ -21,7 +21,9 @@ function AddPet() {
   const handleSubmit = async ()=>{
     try{
         const token = await getAccessToken();
-        console.log("Using token:", token); 
+        //console.log("Using token:", token); 
+        const idToken = state.idToken;
+        //console.log("id toke",idToken)
         const result = await createPet(formData, token)
 
         if (result.id){
