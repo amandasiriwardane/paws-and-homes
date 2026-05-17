@@ -51,12 +51,16 @@ useEffect(() => {
       
       try {
         const token = await getAccessToken();
-        //console.log("Token:", token ? "exists": "null/undefined")
-        const data = await completeRegistration(requestedRole, token);
+        console.log("Token:", token )
+        console.log("Token:", token ? "exists": "null/undefined")
+        const data = await completeRegistration(requestedRole,userInfo?.id,
+  userInfo?.userName || userInfo?.userName || userInfo?.email, token);
         
         if (data.message === 'Role assigned successfully!') {
           setTimeout(async () => {
-            await signOut();
+            await signOut({
+              federated: true
+          });
           }, 1000);
         }
       } catch (err) {
